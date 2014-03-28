@@ -1,9 +1,9 @@
 angular.module('markdown', [])
-    .filter('markdown', function () {
+    .filter('markdown', function ($sce) {
         var converter = new Showdown.converter();
         return function (text) {
             var markdown = text || '';
             var html = converter.makeHtml(markdown);
-            return html;
+            return $sce.trustAsHtml(html);
         };
     });
